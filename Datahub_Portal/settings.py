@@ -91,6 +91,7 @@ DATABASES = {
     }        
 }
 
+BROKER_URL = "sqla+postgresql://%s:%s@%s:%s/%s"%(DATABASES['default']['USER'],DATABASES['default']['PASSWORD'],DATABASES['default']['HOST'],DATABASES['default']['PORT'],DATABASES['default']['NAME'])
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
