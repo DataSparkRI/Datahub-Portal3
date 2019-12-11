@@ -75,9 +75,14 @@ WSGI_APPLICATION = 'Datahub_Portal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': 'dfo7a6jfomgjn9',             # Or path to database file if using sqlite3.
+        'USER': 'hjmbvzocsltdnk',             # Not used with sqlite3.
+        'HOST': 'ec2-174-129-254-250.compute-1.amazonaws.com',
+        'PASSWORD': '7a853f31172d5aa2bf9e45868972149d9dbce9c15e47255035712068bd604916',
+                    # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '5432',
+    }        
 }
 
 
