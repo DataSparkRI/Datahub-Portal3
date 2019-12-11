@@ -23,9 +23,9 @@ import django_heroku
 SECRET_KEY = '2&&h*h*s6j$&rdd^81m=bsh=&v0v0nv4trm3+a@g&6@^$w7k8n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '*']
 
 
 # Application definition
@@ -69,6 +69,9 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
 
 WSGI_APPLICATION = 'Datahub_Portal.wsgi.application'
 
@@ -126,4 +129,21 @@ SITE_ID=1
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR+'/static/'
+STATICFILES_DIRS = [
+    BASE_DIR + "/Datahub_Portal/static"
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR+'/media/'
+
+FIXTURE_DIRS = (
+   BASE_DIR + "/Datahub_Core/fixtures/",
+)
+
+try:
+    from Datahub_Portal.local_settings import *
+except ImportError:
+    pass
+
 django_heroku.settings(locals())
