@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -23,16 +23,6 @@
     <link rel="stylesheet" href="/static/css/main.css">
     <!-- Responsive Style -->
     <link rel="stylesheet" href="/static/css/responsive.css">
-    <style>
-    a {
-       color: #585b60;
-    }
-.services-item {
-    padding: 20px;
-    border-radius: 4px;
-    text-align: left;
-}
-    </style>
 
   </head>
   <body>
@@ -50,9 +40,9 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto w-100 justify-content-end clearfix">
               <li class="nav-item dropdown">
-		<a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		  System & Data
-		</a>
+                <a class="nav-link dropbtn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  System & Data
+                </a>
 		<div class="dropdown-content" aria-labelledby="navbarDropdown">
 		  <a class="dropdown-item" href="/system_overview/">Overview</a>
 		  <a class="dropdown-item" href="/system_data_holdings/">Data Holdings</a>
@@ -60,7 +50,7 @@
                 </div>
 	      </li>
 	      <li class="nav-item dropdown">
-		<a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="nav-link dropbtn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		  Governance
 		</a>
 		<div class="dropdown-content" aria-labelledby="navbarDropdown">
@@ -70,7 +60,7 @@
                 </div>
 	      </li>
 	      <li class="nav-item dropdown">
-		<a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="nav-link dropbtn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		  Research
 		</a>
 		<div class="dropdown-content" aria-labelledby="navbarDropdown">
@@ -79,7 +69,7 @@
                 </div>
 	      </li>
 	      <li class="nav-item dropdown">
-		<a class="nav-link dropbtn" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<a class="nav-link dropbtn" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		  Requesting Data
 		</a>
 		<div class="dropdown-content" aria-labelledby="navbarDropdown">
@@ -96,17 +86,14 @@
 
       <!-- Hero Area Start -->
 
-
       {{ flatpage.flatpageaddon.header|safe }}
 
       <!-- Hero Area End -->
 
     </header>
 
-   {{ flatpage.content }}
-   {% block content %}{% endblock %}
-
-
+    {{ flatpage.content }}
+    {% block content %}{% endblock %}
 
     <!-- Footer Section Start -->
     <footer id="footer" class="footer-area section-padding">
