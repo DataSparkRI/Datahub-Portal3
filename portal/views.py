@@ -25,7 +25,8 @@ def filepage(request, slug):
 		  </thead>
 		  <tbody>"""
     for i in files:
-        content = content + """
+        try:
+           content = content + """
 		    <tr>
 		      <th scope="row">%s</th>
 		      <td>%s</td>
@@ -33,6 +34,15 @@ def filepage(request, slug):
 		      <td>%s</td>
                       <td><a href="%s">Download</a></td>
 		    </tr>"""%(i.filename, i.extension, filesizeformat(i.file.size), i.upload_at.strftime('%Y-%m-%d %H:%M'), i.file.url)
+        except:
+           content = content + """
+		    <tr>
+		      <th scope="row">%s</th>
+		      <td>%s</td>
+		      <td>%s</td>
+		      <td>%s</td>
+                      <td><a href="%s">Download</a></td>
+		    </tr>"""%('N/A', "N/A", "N/A", i.upload_at.strftime('%Y-%m-%d %H:%M'), i.file.url)
     content = content + "</table>"
     filepage = {
                  "title": f.name,
