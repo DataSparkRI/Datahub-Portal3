@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'django_celery_beat',
     'portal',
     #'django_celery_monitor',
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'Datahub_Portal.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'Datahub_Portal/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'media/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
