@@ -23,7 +23,7 @@ import django_heroku
 SECRET_KEY = '2&&h*h*s6j$&rdd^81m=bsh=&v0v0nv4trm3+a@g&6@^$w7k8n'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '*']
 
