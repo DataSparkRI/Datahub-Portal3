@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 import os
+from django.core.files.base import ContentFile
 
 class FlatPageAddon(models.Model):
     flatpage = models.OneToOneField(FlatPage, on_delete=models.CASCADE)
@@ -18,6 +19,15 @@ class Template(models.Model):
     file = models.FileField(upload_to='templates', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_saved_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.content:
+           if self.file:
+              f = open(self.file.path,'w')
+              f.write(self.content)
+              f.close()
+        super(Template, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.file_name
