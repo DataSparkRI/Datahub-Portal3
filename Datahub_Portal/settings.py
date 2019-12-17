@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'django_cleanup.apps.CleanupConfig',
     'django_celery_beat',
     'portal',
+    'project',
+    'dictionary',
     #'django_celery_monitor',
 ]
 
@@ -152,6 +154,9 @@ MEDIA_ROOT = BASE_DIR+'/media/'
 FIXTURE_DIRS = (
    BASE_DIR + "/Datahub_Core/fixtures/",
 )
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240
+KEY = "EkuEZ3wQfYs38XJ9"
 
 try:
     from Datahub_Portal.local_settings import *
