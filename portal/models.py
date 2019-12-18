@@ -5,11 +5,14 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 import os
 from django.core.files.base import ContentFile
+from simple_history.models import HistoricalRecords
+
 
 class FlatPageAddon(models.Model):
     flatpage = models.OneToOneField(FlatPage, on_delete=models.CASCADE)
     header = models.TextField(blank=True)
-   
+    history = HistoricalRecords()
+
     def __str__(self):
         return "%s - %s" %(str(self.id), self.flatpage.title)
 
@@ -19,6 +22,7 @@ class Template(models.Model):
     file = models.FileField(upload_to='templates', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     last_saved_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
+    history = HistoricalRecords()
 
     def save(self, *args, **kwargs):
         if self.content:
@@ -46,6 +50,7 @@ class FilePage(models.Model):
             'the system will use “flatpages/default.html”.'
         ),
     )
+    history = HistoricalRecords()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
@@ -60,6 +65,7 @@ class UploadFile(models.Model):
     upload_at = models.DateTimeField(auto_now_add=True)
     upload_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     file = models.FileField(upload_to='upload_file')
+    history = HistoricalRecords()
 
     @property
     def filename(self):

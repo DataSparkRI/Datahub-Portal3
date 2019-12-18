@@ -4,7 +4,43 @@ from django.conf import settings
 from django.http import JsonResponse
 from dictionary.receive import Receive
 from dictionary.models import Group, DataSet
+from project.models import Project
 from django.shortcuts import get_object_or_404
+from django.core import serializers
+import json
+
+#from django.contrib.gis.serializers.geojson import Serializer
+from django.db.models import Manager
+# FYI: It can be any of the following as well:
+# from django.core.serializers.pyyaml import Serializer
+# from django.core.serializers.python import Serializer
+from django.core.serializers.json import Serializer
+
+JSON_ALLOWED_OBJECTS = (dict,list,tuple,str,int,bool)
+
+
+class CustomSerializer(Serializer):
+
+    def end_object(self, obj):
+        for field in self.selected_fields:
+            if field == 'pk':
+                continue
+            elif field in self._current.keys():
+                continue
+            else:
+                try:
+                    if '__' in field:
+                        fields = field.split('__')
+                        value = obj
+                        for f in fields:
+                            value = getattr(value, f)
+                        if value != obj and isinstance(value, JSON_ALLOWED_OBJECTS) or value == None:
+                            self._current[field] = value
+
+                except AttributeError:
+                    pass
+        super(CustomSerializer, self).end_object(obj)
+
 
 @csrf_exempt
 def receive(request):
@@ -60,6 +96,13 @@ def get(request):
              records.append(dataset)
           g.update({"records":records})
           result.append(g)
+    elif type == "project":
+       projects = Project.objects.all().order_by('created_at')
+       serializers = CustomSerializer()
+       json_data = serializers.serialize(projects, fields=('pk', 'title','short_title','slug','description','image','publish','data_sources__name','created_by','created_at','keywords','related_project'))
+
+       j = json.loads(json_data)
+       return JsonResponse(j, safe=False)
     else:
        return JsonResponse({"message":"Error: Invalid Request"}, safe=False)
     return JsonResponse(result, safe=False)
@@ -94,7 +137,7 @@ def dataset(request, model_name):
     filepage = {
                  "title": dataset.user_friendly_name,
                  "content": content,
-                 "header": dataset.description,
+                 "dataset": dataset,
                }
     return render(request, template_name, filepage)
 

@@ -1,6 +1,19 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-# Create your models here.
+from django.utils.text import slugify
+
+class Keyword(models.Model):
+    value = models.CharField(max_length=100,unique=True)
+    subnav_order = models.IntegerField(unique=True, null=True, blank=True)
+    slug = models.SlugField()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.value)
+        super(Keyword, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.value
+
 
 class DataSource(models.Model):
     short = models.CharField(max_length=11)
