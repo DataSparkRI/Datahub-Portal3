@@ -1,9 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse, HttpResponsePermanentRedirect
-from django.shortcuts import get_object_or_404
-from portal.models import FilePage, UploadFile
+from portal.models import FilePage, UploadFile, Template
 from django.conf import settings
 from django.template.defaultfilters import filesizeformat
+from django.contrib.admin.views.decorators import staff_member_required
+from portal.forms import TemplateForm
 
 def filepage(request, slug):
     f = get_object_or_404(FilePage, slug=slug, publish=True)
@@ -51,4 +52,23 @@ def filepage(request, slug):
                }
 
     return render(request, template_name, filepage)
+
+@staff_member_required(login_url='/accounts/login/')
+def edit_template(request, template_id):
+    template = get_object_or_404(Template, id=template_id)
+    if request.method == "POST":
+        form = TemplateForm(request.POST or None, instance=template)
+        if form.is_valid():
+            template = form.save(commit=False)
+            template.save()
+            return JsonResponse({"message":"Saved"}, safe=False)
+    else:
+        form = TemplateForm(request.POST or None, instance=template)
+
+    context = {'form': form,
+               'template':template}
+    return render(request, 'template/editor.html', context)
+
+
+    
 

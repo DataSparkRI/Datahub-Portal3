@@ -67,6 +67,7 @@ class FilePageAdmin(admin.ModelAdmin):
         formset.save_m2m()
 
 class TemplateAdmin(admin.ModelAdmin):
+    change_form_template = 'template/change_form.html'
     fieldsets = (
         (None, {'fields': ('file_name', 'content', 'file', 'created_at', 'last_saved_by')}),
     )
