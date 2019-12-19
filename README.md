@@ -136,6 +136,11 @@ add change_form.html to template
 {% endblock %}
 ```
 
+url.py
+```python
+        path('template/<template_id>/edit/', views.edit_template, name='edit_template'),
+```
+
 http://localhost:8000/flatpage/1/edit/ \
 http://localhost:8000/template/8/edit/ \
 Use ```Ctrl + s``` to save data
