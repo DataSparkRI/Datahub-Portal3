@@ -70,7 +70,7 @@ http://localhost:8000/dictionary/get?type=project
                   data_sources__name: "DCYF"
          }
 }]
-'''
+```
 
 ### API Example POST to update data dictionary
 API Post URL: http://localhost:8000/dictionary/receive
@@ -83,7 +83,7 @@ API Post URL: http://localhost:8000/dictionary/receive
   rootHeader: ["name", "order", ect],
   row: ["name_value", "order_value", ect],
 }
-'''
+```
 
 ### Use monaco editor on flatpage.content and template.content
 http://localhost:8000/flatpage/1/edit/
