@@ -136,8 +136,8 @@ add change_form.html to template
 {% endblock %}
 ```
 
->http://localhost:8000/flatpage/1/edit/
->http://localhost:8000/template/8/edit/
+http://localhost:8000/flatpage/1/edit/ \
+http://localhost:8000/template/8/edit/ \
 Use ```Ctrl + s``` to save data
 
 
