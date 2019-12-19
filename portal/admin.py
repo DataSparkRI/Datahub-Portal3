@@ -31,6 +31,7 @@ class UploadFileInline(admin.TabularInline):
     readonly_fields = ['upload_by', 'upload_at']
 
 class FlatPageAdmin(admin.ModelAdmin):
+    change_form_template = 'flatpages/change_form.html'
     model = FlatPage
     form = FlatpageForm
     fieldsets = (
