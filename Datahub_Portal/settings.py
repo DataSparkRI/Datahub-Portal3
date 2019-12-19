@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'simple_history',
-    'django_celery_beat',
     'portal',
     'project',
     'dictionary',
