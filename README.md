@@ -74,7 +74,7 @@ http://localhost:8000/dictionary/get?type=project
 
 ### API Example POST to update data dictionary
 API Post URL: http://localhost:8000/dictionary/receive
-```json
+```
 { api_key: "YOUR SETTING KEY",
   save_type: "doc",
   user_friendly_name: "",
@@ -86,6 +86,58 @@ API Post URL: http://localhost:8000/dictionary/receive
 ```
 
 ### Use monaco editor on flatpage.content and template.content
-http://localhost:8000/flatpage/1/edit/
-http://localhost:8000/template/8/edit/
+forms.py
+```python
+class TemplateForm(forms.ModelForm):
+    file_name = forms.CharField(label='Name', max_length=200, required=True)
+    content = forms.CharField(label='HTML', widget=forms.Textarea, required=False)
+    
+    file_name.widget.attrs.update({'class': 'form-control form-control-lg'})
+    content.widget.attrs.update({'class': 'form-control form-control-lg', 'style':'display:none;'})
+
+    class Meta:
+        model = Template
+        fields = ('file_name', 'content')
+```
+
+view.py
+```python
+@staff_member_required(login_url='/accounts/login/')
+def edit_template(request, template_id):
+    template = get_object_or_404(Template, id=template_id)
+    if request.method == "POST":
+        form = TemplateForm(request.POST or None, instance=template)
+        if form.is_valid():
+            template = form.save(commit=False)
+            template.save()
+            return JsonResponse({"message":"Saved"}, safe=False)
+    else:
+        form = TemplateForm(request.POST or None, instance=template)
+
+    context = {'form': form,
+               'template':template,
+               'edit':'content'}
+    return render(request, 'flatpages/editor.html', context)
+```
+
+admin.py
+```python
+class TemplateAdmin(admin.ModelAdmin):
+    change_form_template = 'template/change_form.html'
+```
+
+add change_form.html to template
+```
+{% extends 'admin/change_form.html' %}
+
+{% block object-tools-items %}
+      <li><a href="{% url 'edit_template' original.id %}" class="historylink">Editor</a></li>
+      {{ block.super }}
+{% endblock %}
+```
+
+>http://localhost:8000/flatpage/1/edit/
+>http://localhost:8000/template/8/edit/
 Use ```Ctrl + s``` to save data
+
+
