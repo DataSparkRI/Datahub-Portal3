@@ -146,3 +146,40 @@ http://localhost:8000/template/8/edit/ \
 Use ```Ctrl + s``` to save data
 
 
+### Angular JS Example on API
+
+```html
+<script src="/static/js/angular.min.js"></script>
+<div class="about-area section-padding" ng-app="myApp" ng-controller="customersCtrl">
+<div class="container">
+   <div class="row">
+      <div class="col-lg-4 col-md-6 col-xs-12 services-item"  ng-repeat="p in projects">
+         <div class="blog-item-wrapper">
+            <div class="blog-item-img">
+               <a href="/project/{{p.fields.slug}}">
+               <img src="/media/{{p.fields.image}}" alt="">
+               </a>
+            </div>
+            <div class="services-item text-left">
+               <h5>{{p.fields.title}}</h5>
+               <p>{{p.fields.description}}</p>
+               <div class="author">
+                  <span class="name"><a href="#">Sources: {{p.fields.data_sources__name}}</a></span>
+                  <span class="date float-right">{{p.fields.created_at| date:'mediumDate'}}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </div>
+</div>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("/dictionary/get?type=project")
+    .then(function (response) {$scope.projects = response.data;});
+});
+</script>
+```
+
