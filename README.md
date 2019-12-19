@@ -32,48 +32,45 @@ ALLOWED_HOSTS  = ["external-host.com", "YOUR_IP_ADDRESS"]
 
 ### API Example GET
 http://localhost:8000/dictionary/get?type=index
-```json
+```
 [{
-name: "General",
-records: [
-{
-name: "RIDE_GED_Test",
-user_friendly_name: null,
-description: "",
-index_dimension: null,
-min_dimension_value: null,
-max_dimension_value: null,
-last_received: null,
-last_update: null,
-next_update: null,
-number_of_rows: null,
-last_refreshed: "2019-12-17 16:19"
-}
-]
+   name: "General",
+   records: [{
+         name: "RIDE_GED_Test",
+         user_friendly_name: null,
+         description: "",
+         index_dimension: null,
+         min_dimension_value: null,
+         max_dimension_value: null,
+         last_received: null,
+         last_update: null,
+         next_update: null,
+         number_of_rows: null,
+         last_refreshed: "2019-12-17 16:19"
+   }]
 }]
 ```
+
 http://localhost:8000/dictionary/get?type=project
-```json
+```
 [{
-model: "project.project",
-pk: 1,
-fields: {
-title: "An Early Warning Story: Youth at Risk of DCYF-Schools Involvement",
-short_title: "An Early Warning Story",
-slug: "an-early-warning-story",
-description: "A profile of at risk youth in schools can help us help them.",
-image: "images/iStock_000004650212XSmall.jpg",
-publish: true,
-created_by: null,
-created_at: "2019-12-18T16:05:30.079Z",
-keywords: [ ],
-related_project: [
-2,
-3
-],
-data_sources__name: "DCYF"
-}
+   model: "project.project",
+   pk: 1,
+         fields: {
+                  title: "An Early Warning Story: Youth at Risk of DCYF-Schools Involvement",
+                  short_title: "An Early Warning Story",
+                  slug: "an-early-warning-story",
+                  description: "A profile of at risk youth in schools can help us help them.",
+                  image: "images/iStock_000004650212XSmall.jpg",
+                  publish: true,
+                  created_by: null,
+                  created_at: "2019-12-18T16:05:30.079Z",
+                  keywords: [ ],
+                  related_project: [2,3],
+                  data_sources__name: "DCYF"
+         }
 }]
+'''
 
 ### API Example POST to update data dictionary
 API Post URL: http://localhost:8000/dictionary/receive
